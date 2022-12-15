@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheCodes Pet Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kenia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@200&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/f0f3454e6b.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+  margin:0;
+  padding: 0;
+}
+:root {
+  --trunk-brown: #A07F65;
+  --sky-blue: #9CE6FC;
+  --ant-color: black;
+  --leaf-color: #8ABD29;
+}
+
+/* body{
+    background: linear-gradient(to bottom, var(--sky-blue), var(--sky-blue) 200px, var(--trunk-brown) 200px, var(--trunk-brown));
+    padding: 0;
+    margin: 0;
+  } */
+
+/* .box-canvas {
+  position: relative;
+  margin: 0;
+  display: block;
+  margin-top: 100px;
+  margin-bottom: 8%;
+  width: 100%;
+  min-width: 300px;
+  height: 200px;
+  background: var(--sky-blue);
+} */
+
+.scene-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: antMarch 7s infinite linear;
+}
+
+/* Slow down the animation when the ants have to travel further */
+@media only screen and (min-width: 600px) {
+  .scene-wrapper {
+    animation: antMarch 10s infinite linear;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .scene-wrapper {
+    animation: antMarch 13s infinite linear;
+  }
+}
+
+@keyframes antMarch {
+  0% {
+    transform: translateX(300px);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Convenience class to wrap all ant elements */
+.ant-wrapper {
+  position: absolute;
+  bottom: -5px;
+  width: 100px;
+  height: 100px;
+}
+
+.ant-wrapper.one {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.ant-wrapper.two {
+  left: calc(100% - 150px);
+  transform: translateX(-100%);
+}
+
+.ant-wrapper.three {
+  left: calc(100% - 300px);
+  transform: translateX(-100%);
+}
+
+/* Wrapper for leaf and pincer */
+.leaf {
+  position: absolute;
+  top: 20px;
+  width: 80px;
+  height: 50px;
+}
+
+/* Actual leaf */
+.leaf::before {
+  content: '';
+  position: absolute;
+  background: var(--leaf-color);
+  width: 80px;
+  height: 50px;
+  clip-path: polygon(33% 9%, 99% 1%, 91% 30%, 100% 70%, 71% 98%, 0 98%, 0% 70%, 0% 30%);
+  border-radius: 20%;
+  transform: rotate(-20deg);
+}
+
+/* Change the leaf shape for each ant */
+.three .leaf::before {
+  clip-path: polygon(33% 9%, 52% 47%, 78% 51%, 89% 75%, 71% 98%, 0 98%, 12% 70%, 0% 30%);
+}
+
+.two .leaf::before {
+  clip-path: polygon(36% 37%, 57% 26%, 73% 14%, 98% 40%, 62% 84%, 0 98%, 12% 70%, 40% 53%);
+}
+
+/* Pincer */
+.leaf::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 12px;
+  border: 2px solid var(--ant-color);
+  width: 10px;
+  height: 5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  transform: rotate(20deg);
+}
+
+/* Head */
+.body-left {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--ant-color);
+  border-radius: 50%;
+  bottom: 17px;
+  right: 60px;
+}
+
+/* Feeler left */
+.body-left::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  height: 10px;
+  width: 5px;
+  border: 1px solid var(--ant-color);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 40%;
+}
+
+/* Feeler left */
+.body-left::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: -8px;
+  height: 10px;
+  width: 5px;
+  border: 1px solid var(--ant-color);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 40%;
+}
+
+.body-middle {
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+  background: var(--ant-color);
+  border-radius: 50%;
+  width: 25px;
+  height: 20px;
+}
+
+/* Middle leg */
+.body-middle::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 10px;
+  height: 15px;
+  width: 15px;
+  border: 2px solid var(--ant-color);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: middleLegMove 0.25s infinite;
+}
+
+@keyframes middleLegMove {
+  0% {
+    transform: translateY(-5px);
+  }
+
+  50% {
+    transform: translateY(0)
+  }
+
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Front leg */
+.body-middle::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: -15px;
+  height: 15px;
+  width: 15px;
+  border: 2px solid var(--ant-color);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  border-radius: 40%;
+  transform: rotate(20deg);
+  animation: frontLegMove 0.25s infinite;
+}
+
+@keyframes frontLegMove {
+  0% {
+    transform: rotate(20deg);
+  }
+
+  50% {
+    transform: rotate(20deg) translateY(-5px);
+  }
+
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+.body-right {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  width: 30px;
+  height: 20px;
+  background: var(--ant-color);
+  border-radius: 50%;
+  transform: rotate(-10deg);
+}
+
+/* Back leg */
+.body-right::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: -5px;
+  height: 20px;
+  width: 25px;
+  border: 2px solid var(--ant-color);
+  border-left: none;
+  border-bottom: none;
+  transform: skew(0deg, -40deg) rotate(25deg);
+  animation: backLegMove 0.25s infinite;
+}
+
+@keyframes backLegMove {
+  0% {
+    transform: skew(0deg, -40deg) rotate(25deg);
+  }
+
+  50% {
+    transform: skew(0deg, -40deg) rotate(25deg) translateY(-3px);
+  }
+
+  100% {
+    transform: skew(0deg, -40deg) rotate(25deg);
+  }
+}
+
+
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+
+/* nav {
+  margin: 0;
+} */
+.ant-font {
+  font-family: 'Kenia', cursive;
+  font-size: 80px;
+  color: black;
+  padding: 0;
+  line-height: 50%;
+  margin-top:15px;
+  display:flex;
+  justify-content: center;
+  /* margin-bottom: 0; */
+  /* padding-bottom: 0; */
+  /* display:inline-block; */
+
+}
+#more {display: none;}
+
+.section2 > a:hover {
+  cursor: pointer;
+}
+
+.ant-image-header {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:20px;
+  padding:0;
+  border: 0;
+
+}
+
+
+video {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  min-height:100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* background: #3586ff; */
+  /* background-image: url("https://i.ibb.co/d6NZzsN/ajithkumar-m-H3-QIF3-JSUM-unsplash.jpg"); */
+  background-size: cover;
+  overflow: hidden;
+}
+
+.section2 {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  font-family: 'Anek Devanagari', sans-serif;
+  font-size: 20px;
+  /* color: #3E6D9C; */
+  padding: 20px;
+  text-align: center;
+}
+
+
+.section3 {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  text-align: center;
+  font-family: 'Anek Devanagari', sans-serif;
+  font-size: 20px;
+  /* color:#3E6D9C; */
+  padding: 20px;
+  text-align: center;
+}
+
+.section4 {
+  position: relative;
+  width: 100%;
+  /* height: 800px; */
+  text-align: center;
+  font-family: 'Anek Devanagari', sans-serif;
+  font-size: 20px;
+  /* color:#3E6D9C; */
+  padding: 20px;
+  text-align: center;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+
+.section5 {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  /* background: no-repeat; */
+  /* object-fit: cover; */
+
+}
+
+.card-img-top{
+  width:100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+
+.footer-distributed {
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+  padding: 45px 50px;
+}
+
+.footer-distributed .footer-left p {
+  color: #8f9296;
+  font-size: 14px;
+  margin: 0;
+}
+/* Footer links */
+
+.footer-distributed p.footer-links {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0 0 10px;
+  padding: 0;
+  transition: ease .25s;
+}
+
+.footer-distributed p.footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color: inherit;
+  transition: ease .25s;
+}
+
+.footer-distributed .footer-links a:before {
+  content: "·";
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+.footer-distributed .footer-right {
+  float: right;
+  margin-top: 6px;
+  max-width: 180px;
+}
+
+.footer-distributed .footer-right a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #33383b;
+  border-radius: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+  margin-left: 3px;
+  transition:all .25s;
+}
+
+.footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+
+.footer-distributed p.footer-links a:hover{text-decoration:underline;}
+
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .footer-distributed .footer-left, .footer-distributed .footer-right {
+    text-align: center;
+  }
+  .footer-distributed .footer-right {
+    float: none;
+    margin: 0 auto 20px;
+  }
+  .footer-distributed .footer-left p.footer-links {
+    line-height: 1.8;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <video playsinline autoplay muted loop>
+        <source src="https://res.cloudinary.com/doaeqsubt/video/upload/v1671069716/ant-video_v9tzp6.mp4"
+            type="video/mp4">
+        <!-- <source src="movie.ogg" type="video/ogg"> -->
+        Your browser does not support the video tag.
+    </video>
+    <!-- HEADINGS -------------------------------------------------------------------->
+
+    <header id="header">
+        <nav class="navbar" style="background-color: none;">
+            <h1 class="ant-font">Ants</h1>
+
+
+        </nav>
+    </header>
+   
+    <!-- END OF HEADINGS -------------------------------------------------------------->
+
+    <!-- SECTION 1 LEAFCUTTER ANTS MARCHING ANIMATION------------------------------->
+    <section class="section1" id="section-1">
+
+    </section>
+    <!-- END OF SECTION 1 MUMBAI MAIN IMAGE WITH WAVE ANIMATION------------------------->
+
+    <!-- SECTION 2 MUMBAI SUMMARY------------------------------------------------------->
+    <section class="section2" id="section-2">
+        <!-- <hr class="my-4"> -->
+        <h3>Why this Website?</h3>
+        <p>When we were kids, my kid sister used to watch Ants all day using my father's magnifying glass.
+            In the monsoons, ants would try<span id="dots">...</span><span id="more"> to find refuge inside homes
+                and this was a treat for a 6 year old with a vivid imagination.
+                She would even name the small crevices in the corner of the room where ants would come and go.
+                She used to point at the crevices and say, "Didi(Older sister) look! This is the Ants bedroom and that
+                is their kitchen!"
+                My sister's imagination is the inspiration for creating this website.
+            </span></p>
+        <a onclick="myFunction()" id="myBtn" style="color:blue;">Read more</a>
+
+        <img class="ant-image-header" width="200" height="200" src="https://i.ibb.co/3RMXHPm/ants-576x432-1.webp" />
+
+        <!-- <hr class="my-4"> -->
+    </section>
+    <!-- END OF SECTION 2 MUMBAI SUMMARY------------------------------------------------>
+
+    <!-- SECTION 3 POWER OF TEAMWORK WITH YOUTUBE VIDEO------------------------------------------->
+    <section class="section3" id="section-3">
+        <!-- <hr class="my-4"> -->
+        <h2 style="font-style:bold;">Power of Teamwork </h2>
+        <p>Ants are nature's undisputed kings of teamwork and structure. In an ant nest there is NO leader, no boss
+            telling everyone what to do. Yet they organise themselves into colonies exceeding 7 million individuals!!
+        </p>
+        <iframe width="721" height="480" src="https://www.youtube.com/embed/K2v895MJWyY"
+            title="Stronger When We Work Together: Ants" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+
+        <!-- <hr class="my-4"> -->
+
+    </section>
+    <!-- END OF SECTION 3 POWER OF TEAMWORK WITH YOUTUBE VIDEO------------------------------------------->
+    <section class="section4" id="section-4">
+        <h3 class="text-start text-center">More Fun with Ants!</h3>
+        <p class="text-center">There's so much to explore when it comes to Ants. Play games or play a prank on someone
+            and even watch a video on the longest World War in history- Ant Wars! </p>
+        <div class="row row-cols-1 row-cols-md-4 g-4 ms-1 me-1">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://www.pestworldforkids.org/media/26374/archibalds-adventure.png?preset=listing768"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Wanna go on an 'Ant'venture?</h5>
+                        <p class="card-text"> Follow Archibald, the fussy house ant as he scours to find food for his
+                            colony while staying out of harm`s way and avoiding unknown dangers inside the home.</p>
+                        <a href="https://www.pestworldforkids.org/games/archibalds-adventure/index.html"
+                            class="stretched-link">Play</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://play-lh.googleusercontent.com/GH7-JH0TxU3g4QAc-O5DE1t9gWv-TFFcsXRon75dqRREoiCmb-7wUUowlsjBG9o-cZTJ=w240-h480-rw"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Eek! Ants on your screen?</h5>
+                        <p class="card-text"> This cool application will display animation of ants on the screen of your
+                            phone. Download this fun app to prank friends and family.
+                        </p>
+                        <br />
+                        <a href="https://play.google.com/store/apps/details?id=com.perfectapps.antsonscreenprank&hl=en_CA&gl=US"
+                            class="stretched-link">Download</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://i.ibb.co/PGnHpKK/ant-world-war.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">The World War you Never knew About</h5>
+                        <p class="card-text">Every day billions of soldiers fight a merciless war on thousands of
+                            fronts, that has been going on for over one hundred million years: The world war of the
+                            Ants.
+                        </p>
+                        <a href="https://www.youtube.com/watch?v=7_e0CA_nhaE&t=442s" class="stretched-link">Watch</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://www.pestworldforkids.org/media/4049/pest-det-cover-hires_220x186.jpg?preset=listing768"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Are you a Bookworm?</h5>
+                        <p class="card-text"> The Pest Detectives" follows the adventures of Millie, an 8-year-old
+                            insect lover, as she solves real-life pest mysteries with her father, a pest professional.
+                        </p>
+                        <a href="https://www.pestworld.org/media/560210/pestdetectivesebook.pdf"
+                            class="stretched-link">Download Ebook</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- SECTION 5 LEAF CUTTER ANTS ANIMATION ----------------------------------------->
+    <section class="section5" id="section-5">
+        <!-- <hr class="my-4"> -->
+        <div class="box-canvas">
+
+            <div class="scene-wrapper">
+                <div class="ant-wrapper one">
+                    <div class="leaf"></div>
+                    <div class="body-left"></div>
+                    <div class="body-middle"></div>
+                    <div class="body-right"></div>
+                </div>
+
+                <div class="ant-wrapper two">
+                    <div class="leaf"></div>
+                    <div class="body-left"></div>
+                    <div class="body-middle"></div>
+                    <div class="body-right"></div>
+                </div>
+
+                <div class="ant-wrapper three">
+                    <div class="leaf"></div>
+                    <div class="body-left"></div>
+                    <div class="body-middle"></div>
+                    <div class="body-right"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <hr class="my-4"> -->
+    </section>
+    <!-- END OF SECTION 5 LEAF CUTTER ANTS ANIMATION ----------------------------------------->
+
+    <!-- FOOTER ------------------------------------------------------------------------->
+
+    <footer class="footer-distributed">
+        <div class="footer-right">
+            <!-- <a href="#"><i class="fa fa-facebook"></i></a> -->
+            <a href="https://www.instagram.com/anisam0104/"><i class="fa fa-instagram"></i></a>
+            <a href="https://github.com/anisam04/"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+        <div class="footer-left">
+            <p class="footer-links">
+                <a class="link-1" href="#section-1">Home</a>
+                <a href="https://anisam04.github.io/">Ani's Portfolio</a>
+                <!-- <a href="#">Pricing</a>
+                <a href="#">About</a>
+                <a href="#">Faq</a>
+                <a href="#">Contact</a> -->
+            </p>
+
+            <p><a class="animation-copyright-release"
+                    onclick="alert('Copyright 2022 by Suzanne Aitchison \(https\:\/\/codepen.io\/aitchiss\/pen\/ExPNJYr\). Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\:The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.THE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.')">
+                    Copyright Release</a></p>
+        </div>
+
+    </footer>
+
+    <!-- END FOOTER --------------------------------------------------------------------->
+</body>
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+</script>
+
+</html>
