@@ -13,4 +13,4 @@ I made my site on Ants🐜🐜🐜. I used the following to make my site stand o
 - Bootstrap Cards, navbar and footer
 
 
-[Launch Site](https://anisam04.github.io/SheCodesChallenge-HometownPage/)
+[Launch Site](https://anisam04.github.io/SheCodesChallenge-PetLandingPage/)
